@@ -79,7 +79,7 @@ const App = () => {
       </div>
       <Form>
         <form className="form">
-          <label label>
+          <label>
             Search:
             <input type="text" onChange={changeHandler} />
           </label>
