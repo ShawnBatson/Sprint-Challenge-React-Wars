@@ -1,1 +1,18 @@
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
+.ReactWar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  height: 10rem;
+  width: 80%;
+  background: tan;
+  opacity: 0.6;
+  border-radius: 10px;
+}

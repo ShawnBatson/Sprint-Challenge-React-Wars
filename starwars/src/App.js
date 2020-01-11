@@ -3,6 +3,8 @@ import "./App.css";
 import axios from "axios";
 import WarCard from "./components/WarriorCard";
 import styled from "styled-components";
+import nextAndPrev from "./components/Buttons";
+import Characters from "./components/Characters";
 
 // import styled from "styled-components";
 
@@ -31,8 +33,9 @@ const App = () => {
       .then(res => {
         setWarrior(res.data.results);
         console.log(res.data.results);
+        console.log(res.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log("You've encountered an error", err));
   }, []);
 
   if (warrior.length === 0) {
@@ -41,7 +44,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="ReactWar">React Wars</h1>
+      <div className="title">
+        <h1 className="ReactWar">React Wars</h1>
+      </div>
       <div>
         <MainCard className="MainCards">
           {warrior.map(warrior => (
@@ -51,6 +56,8 @@ const App = () => {
           ))}
         </MainCard>
       </div>
+      <Characters pageNumber={pageNumber} />
+      <nextAndPrev pageNumber={pageNumber} setPageNumber={setPageNumber} />
     </div>
   );
 };
