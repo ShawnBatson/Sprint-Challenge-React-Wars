@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../components/StarWars.css";
-import styled from "styled-components";
 
 export default function WarCard(props) {
   return (

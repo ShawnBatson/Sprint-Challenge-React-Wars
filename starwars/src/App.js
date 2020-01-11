@@ -83,7 +83,7 @@ const App = () => {
             Search:
             <input type="text" onChange={changeHandler} />
           </label>
-          <Button onSubmit={() => handleSubmit()}>Submit!</Button>
+          <Button onSubmit={() => handleSubmit()}>Search!</Button>
         </form>
       </Form>
     </div>
