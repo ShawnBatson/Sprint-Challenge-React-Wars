@@ -3,10 +3,6 @@ import "./App.css";
 import axios from "axios";
 import WarCard from "./components/WarriorCard";
 import styled from "styled-components";
-import nextAndPrev from "./components/Buttons";
-import Characters from "./components/Characters";
-
-// import styled from "styled-components";
 
 const Card = styled.div`
   border: 2px solid black;
@@ -24,8 +20,33 @@ const MainCard = styled.div`
   flex-wrap: wrap;
 `;
 
+const Form = styled.form`
+  display: flex;
+  margin: 10rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+`;
+
+const Button = styled.button`
+  width: 0, auto;
+  border-radius: 5px;
+  box-shadow: 1px 2px;
+`;
+
 const App = () => {
   const [warrior, setWarrior] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [name, setName] = useState("");
+
+  const changeHandler = event => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    setName(name);
+    console.log(name);
+  };
 
   useEffect(() => {
     axios
@@ -56,8 +77,15 @@ const App = () => {
           ))}
         </MainCard>
       </div>
-      <Characters pageNumber={pageNumber} />
-      <nextAndPrev pageNumber={pageNumber} setPageNumber={setPageNumber} />
+      <Form>
+        <form className="form">
+          <label label>
+            Search:
+            <input type="text" onChange={changeHandler} />
+          </label>
+          <Button onSubmit={() => handleSubmit()}>Submit!</Button>
+        </form>
+      </Form>
     </div>
   );
 };
