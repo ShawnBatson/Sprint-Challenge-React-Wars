@@ -7,10 +7,19 @@ import styled from "styled-components";
 // import styled from "styled-components";
 
 const Card = styled.div`
-  border: 1px solid black;
+  border: 2px solid black;
+  min-height: 250px;
   width: 30%;
-  margin: 1%;
-  min-height: 150px;
+  margin 1%;
+  background: tan;
+  opacity: 0.6;
+  box-shadow: 5px 10px;
+  border-radius: 10px;
+`;
+
+const MainCard = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 const App = () => {
@@ -29,25 +38,18 @@ const App = () => {
   if (warrior.length === 0) {
     return <h1>Loading...</h1>;
   }
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
-
-  // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
 
   return (
     <div className="App">
-      <h1>React Wars</h1>
-
-      {/* Grid Styled Component that was created above on line 8 */}
+      <h1 className="ReactWar">React Wars</h1>
       <div>
-        {warrior.map(warrior => (
-          /* Card Styled Component created above on line 14 */
-          <Card>
-            <WarCard warrior={warrior} />
-          </Card>
-        ))}
+        <MainCard className="MainCards">
+          {warrior.map(warrior => (
+            <Card className="renderedCard">
+              <WarCard warrior={warrior} />
+            </Card>
+          ))}
+        </MainCard>
       </div>
     </div>
   );
