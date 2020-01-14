@@ -20,7 +20,7 @@ const MainCard = styled.div`
   flex-wrap: wrap;
 `;
 
-const Form = styled.form`
+const FormOne = styled.form`
   display: flex;
   margin: 10rem;
   justify-content: center;
@@ -36,17 +36,25 @@ const Button = styled.button`
 
 const App = () => {
   const [warrior, setWarrior] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-  const [name, setName] = useState("");
+  const [inputValue, setInputValue] = useState(""); //not used..couldn't finish stretch
 
-  const changeHandler = event => {
-    setInputValue(event.target.value);
-  };
+  // const changeHandler = event => {
+  //   setInputValue(event.target.value);
+  //   // const searchWar = warrior.filter(element => {
+  //   //   return element.name.includes(inputValue);
+  //   // });
+  //   // setWarrior(searchWar);
+  //   // console.log(event.target.value);
+  // };
 
-  const handleSubmit = () => {
-    setName(name);
-    console.log(name);
-  };
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   const searchWar = warrior.filter(element => {
+  //     return element.name.includes(inputValue);
+  //   });
+  //   setWarrior(searchWar);
+  //   console.log(event);
+  // };
 
   useEffect(() => {
     axios
@@ -63,6 +71,24 @@ const App = () => {
     return <h1>Loading...</h1>;
   }
 
+  const changeHandler = event => {
+    setInputValue(event.target.value);
+    const searchWar = warrior.filter(element => {
+      return element.name.includes(inputValue);
+    });
+    setWarrior(searchWar);
+    console.log(event.target.value);
+  };
+
+  // const handleSubmit = event => {
+  //   event.preventDefault();
+  //   const searchWar = warrior.filter(element => {
+  //     return element.name.includes(inputValue);
+  //   });
+  //   setWarrior(searchWar);
+  //   console.log(event);
+  // };
+
   return (
     <div className="App">
       <div className="title">
@@ -70,22 +96,32 @@ const App = () => {
       </div>
       <div>
         <MainCard className="MainCards">
-          {warrior.map(warrior => (
-            <Card className="renderedCard">
-              <WarCard warrior={warrior} />
-            </Card>
-          ))}
+          {warrior.map(warrior => {
+            if (warrior.name.includes(inputValue)) {
+              return (
+                <Card className="renderedCard">
+                  <WarCard warrior={warrior} />
+                </Card>
+              );
+            }
+            // <Card className="renderedCard">
+            //   <WarCard warrior={warrior} />
+            // </Card>
+          })}
         </MainCard>
       </div>
-      <Form>
-        <form className="form">
-          <label>
-            Search:
-            <input type="text" onChange={changeHandler} />
-          </label>
-          <Button onSubmit={() => handleSubmit()}>Search!</Button>
-        </form>
-      </Form>
+      <FormOne className="form">
+        <label>
+          Search:
+          <input
+            name="nameInput"
+            value={inputValue}
+            type="text"
+            onChange={changeHandler}
+          />
+        </label>
+        {/* <Button type="submit">Search!</Button> */}
+      </FormOne>
     </div>
   );
 };
