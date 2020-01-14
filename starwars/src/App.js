@@ -37,6 +37,7 @@ const Button = styled.button`
 const App = () => {
   const [warrior, setWarrior] = useState([]);
   const [inputValue, setInputValue] = useState(""); //not used..couldn't finish stretch
+  const [newSearch, setNewSearch] = useState([]);
 
   // const changeHandler = event => {
   //   setInputValue(event.target.value);
@@ -61,6 +62,7 @@ const App = () => {
       .get("https://swapi.co/api/people")
       .then(res => {
         setWarrior(res.data.results);
+        setNewSearch(res.data.results);
         console.log(res.data.results);
         console.log(res.data);
       })
@@ -74,9 +76,11 @@ const App = () => {
   const changeHandler = event => {
     setInputValue(event.target.value);
     const searchWar = warrior.filter(element => {
-      return element.name.includes(inputValue);
+      return element.name
+        .toLowerCase()
+        .includes(event.target.value.toLowerCase());
     });
-    setWarrior(searchWar);
+    setNewSearch(searchWar);
     console.log(event.target.value);
   };
 
@@ -96,8 +100,8 @@ const App = () => {
       </div>
       <div>
         <MainCard className="MainCards">
-          {warrior.map(warrior => {
-            if (warrior.name.includes(inputValue)) {
+          {newSearch.map(
+            warrior => {
               return (
                 <Card className="renderedCard">
                   <WarCard warrior={warrior} />
@@ -107,7 +111,7 @@ const App = () => {
             // <Card className="renderedCard">
             //   <WarCard warrior={warrior} />
             // </Card>
-          })}
+          )}
         </MainCard>
       </div>
       <FormOne className="form">
